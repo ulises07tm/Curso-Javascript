@@ -1,18 +1,35 @@
-let nombre = prompt ("ingrese su nombre");
-let apellido = prompt ("ingrese su apellido");
+let horario;
+alert ("bienvenido a la cancha foul ahi");
 
-alert ("bienvenido," + nombre + " " + apellido);
+const nombre = prompt("ingrese su nombre");
 
-// let numeroA = parseInt(prompt ("ingresa el primer numero"));
-// let numeroB = parseInt(prompt ("ingresa el segundo numero"));
+function reservanombre () {
+    alert ("Felicitaciones " + nombre + " hiciste una reserva");
+};
 
-// let suma = numeroA + numeroB;
+do {
 
-// alert ("la suma es: " + suma);
+    horario = parseInt(prompt("Elija un horario para reservar la cancha foul ahi\n\n19\n20\n21\n22\n\npara salir ingrese 0" ));
 
-let numeroA = parseInt(prompt ("ingresa el primer numero"));
-let numeroB = parseInt(prompt ("ingresa el segundo numero"));
+    switch (horario) {
+        case 0:
+            alert("gracias, juegue otro dia");
+            break;
+        case 19:
+            reservanombre ();
+            break;
+        case 20:
+            reservanombre ();
+            break;
+        case 21:
+            reservanombre ();
+            break;
+        case 22:
+            reservanombre ();
+            break;
+        default:
+            alert("opcion invalida")
+            break;
+    }
 
-let resta = numeroA - numeroB;
-
-alert ("la suma es: " + resta);
+}while (horario !==0);
