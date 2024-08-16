@@ -1,10 +1,6 @@
-let horario;
+// array de objetos
 
-alert ("bienvenido a la cancha foul ahi");
-
-const nombre = prompt("ingrese su nombre");
-
-const horariosDisponibles = [
+const turnos = [
     {
         hora: 18,
         precio: "$7500",
@@ -27,37 +23,130 @@ const horariosDisponibles = [
     },
 ]
 
-function reservanombre (nombre, hora, precio) {
-    alert ("Felicitaciones " + nombre + " hiciste una reserva a las " + hora + " el precio es " + precio);
+// llamamos div del html
+
+const container = document.getElementById ("container")
+
+const container2 = document.getElementById ("container2")
+
+const container3 = document.getElementById ("container3")
+
+// funcion para crear cards
+
+function crearCard (turnos) {
+    
+// creamos los elementos
+
+    const card = document.createElement ("div");
+    card.className = "card";
+    
+    const hora = document.createElement ("h2");
+    hora.innerText = `${turnos.hora}hs`;
+    
+    const imagen = document.createElement ("img");
+    imagen.src = "https://media.lacapital.com.ar/p/cbbfede1150318c6266287f347c2c62a/adjuntos/204/imagenes/029/953/0029953122/642x0/smart/futbol-5jpg.jpg";
+    imagen.className = "imagen";
+    
+    const precio = document.createElement ("p");
+    precio.innerText = `${turnos.precio}`;
+    
+    const botonReserva = document.createElement ("button");
+    botonReserva.innerText = "reservar cancha";
+    botonReserva.className = "botonReserva";
+    botonReserva.onclick = () => agregarAlTurnero (turnos);
+    
+    // añadimos los elementos al html
+
+    card.append (hora);
+    card.append (imagen);
+    card.append (precio);
+    card.append (botonReserva);
+    
+    container.append (card);
+    
+}
+
+// llamamos a la funcion
+
+turnos.forEach (el => {
+    crearCard (el)
+});
+
+
+// -----------------------------------------------------------------------------------------------------------------
+
+let turnero = JSON.parse(localStorage.getItem("turnero")) || [];
+
+// funcion para agregar al carrito
+
+function agregarAlTurnero(turno) {
+    if (turnero.some(el => el.hora === turno.hora)) {
+    } else {
+        turnero.push(turno);
+        localStorage.setItem("turnero", JSON.stringify (turnero));
+    }
+}
+
+
+// -----------------------------------------------------------------------------------------------------------------
+
+// funcion para crear cards
+
+function crearCardReservada (turnos) {
+    
+// creamos los elementos
+
+    const card = document.createElement ("div");
+    card.className = "card";
+    
+    const hora = document.createElement ("h2");
+    hora.innerText = `${turnos.hora}hs`;
+    
+    const imagen = document.createElement ("img");
+    imagen.src = "https://media.lacapital.com.ar/p/cbbfede1150318c6266287f347c2c62a/adjuntos/204/imagenes/029/953/0029953122/642x0/smart/futbol-5jpg.jpg";
+    imagen.className = "imagen";
+    
+    const precio = document.createElement ("p");
+    precio.innerText = `${turnos.precio}`;
+    
+    // añadimos los elementos al html
+
+    card.append (hora);
+    card.append (imagen);
+    card.append (precio);
+    
+    container3.append (card);
+    
+}
+
+// -----------------------------------------------------------------------------------------------------------------
+
+// funcion para VER los turnos
+
+const botonTurnos = document.createElement ("button");
+    botonTurnos.innerText = "mostrar turnos";
+    botonTurnos.className = "botonTurnos";
+
+    botonTurnos.onclick = () => {
+    turnero.forEach (el =>  crearCardReservada (el))
 };
 
-do {
+container2.append (botonTurnos);
 
-    let horariosTexto = horariosDisponibles.map(horario => horario.hora).join("\n");
-    horario = parseInt(prompt("Elija un horario para reservar la cancha foul ahí\n\n" + horariosTexto + "\n\nPara salir ingrese 0"));
-    
-    switch (horario) {
-        case 0:
-            alert("gracias, juegue otro dia");
-            break;
-        case 18:
-            reservanombre (nombre, horariosDisponibles[0].hora, horariosDisponibles[0].precio);
-            break;
-        case 19:
-            reservanombre (nombre, horariosDisponibles[1].hora, horariosDisponibles[1].precio);
-            break;
-        case 20:
-            reservanombre (nombre, horariosDisponibles[2].hora, horariosDisponibles[2].precio);
-            break;
-        case 21:
-            reservanombre (nombre, horariosDisponibles[3].hora, horariosDisponibles[3].precio);
-            break;
-        case 22:
-            reservanombre (nombre, horariosDisponibles[4].hora, horariosDisponibles[4].precio);
-            break;
-        default:
-            alert("opcion invalida")
-            break;
-    }
+// -----------------------------------------------------------------------------------------------------------------
 
-}while (horario !==0);
+// funcion para BORRAR los turnos
+
+const borrarTurnos = document.createElement ("button");
+    borrarTurnos.innerText = "borrar turnos";
+    borrarTurnos.className = "botonTurnos";
+
+    borrarTurnos.onclick = () => {
+    turnero = [];
+    localStorage.setItem ("turnero", JSON.stringify(turnero))
+
+    container3.innerHTML = ''
+};
+
+container2.append (borrarTurnos);
+
