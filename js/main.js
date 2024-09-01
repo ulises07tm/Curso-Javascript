@@ -1,27 +1,12 @@
-// array de objetos
+let turnos = []
 
-const turnos = [
-    {
-        hora: 18,
-        precio: "$7500",
-    },
-    {
-        hora: 19,
-        precio: "$7500",
-    },
-    {
-        hora: 20,
-        precio: "$10000",
-    },
-    {
-        hora: 21,
-        precio: "$10000",
-    },
-    {
-        hora: 22,
-        precio: "$10000",
-    },
-]
+fetch ('./data.json')
+    .then ( response => response.json())
+    .then (data => {
+    turnos = data;
+    turnos.forEach(el => crearCard(el));
+    })
+
 
 // llamamos div del html
 
@@ -31,12 +16,13 @@ const container2 = document.getElementById ("container2")
 
 const container3 = document.getElementById ("container3")
 
+
 // funcion para crear cards
 
 function crearCard (turnos) {
     
-// creamos los elementos
-
+    // creamos los elementos
+    
     const card = document.createElement ("div");
     card.className = "card";
     
@@ -56,7 +42,7 @@ function crearCard (turnos) {
     botonReserva.onclick = () => agregarAlTurnero (turnos);
     
     // añadimos los elementos al html
-
+    
     card.append (hora);
     card.append (imagen);
     card.append (precio);
@@ -65,13 +51,6 @@ function crearCard (turnos) {
     container.append (card);
     
 }
-
-// llamamos a la funcion
-
-turnos.forEach (el => {
-    crearCard (el)
-});
-
 
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -84,18 +63,26 @@ function agregarAlTurnero(turno) {
     } else {
         turnero.push(turno);
         localStorage.setItem("turnero", JSON.stringify (turnero));
+
+        Toastify({
+            text:`reservaste las ${turno.hora} hs`,
+            duration: 3000,
+            gravity: "top",
+            position: "right", 
+            backgroundColor: "#234015", 
+            className: "mi-toast",
+        }).showToast();
     }
 }
 
-
 // -----------------------------------------------------------------------------------------------------------------
 
-// funcion para crear cards
+// funcion para crear cards reservadas
 
 function crearCardReservada (turnos) {
     
-// creamos los elementos
-
+    // creamos los elementos
+    
     const card = document.createElement ("div");
     card.className = "card";
     
@@ -110,7 +97,7 @@ function crearCardReservada (turnos) {
     precio.innerText = `${turnos.precio}`;
     
     // añadimos los elementos al html
-
+    
     card.append (hora);
     card.append (imagen);
     card.append (precio);
@@ -121,13 +108,14 @@ function crearCardReservada (turnos) {
 
 // -----------------------------------------------------------------------------------------------------------------
 
-// funcion para VER los turnos
+// funcion para MOSTRAR los turnos 
 
-const botonTurnos = document.createElement ("button");
+    const botonTurnos = document.createElement ("button");
     botonTurnos.innerText = "mostrar turnos";
     botonTurnos.className = "botonTurnos";
 
     botonTurnos.onclick = () => {
+    container3.innerHTML = ''
     turnero.forEach (el =>  crearCardReservada (el))
 };
 
@@ -137,16 +125,69 @@ container2.append (botonTurnos);
 
 // funcion para BORRAR los turnos
 
-const borrarTurnos = document.createElement ("button");
+    const borrarTurnos = document.createElement ("button");
     borrarTurnos.innerText = "borrar turnos";
     borrarTurnos.className = "botonTurnos";
 
+
     borrarTurnos.onclick = () => {
-    turnero = [];
-    localStorage.setItem ("turnero", JSON.stringify(turnero))
+    if (turnero.length > 0) {
 
-    container3.innerHTML = ''
-};
+        Swal.fire({
+            title: "¿Seguro que quiere cancelar las reservas?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí",
+            cancelButtonText: "No"
 
-container2.append (borrarTurnos);
+        }).then((result) => {
+            if (result.isConfirmed) {
 
+                Swal.fire({
+                    title: "Una lástima",
+                    text: "Cancelaste las reservas",
+                    icon: "error",
+                });
+    
+            // aplicamos un retraso al cancelar las reservas
+
+            setTimeout(() => {
+
+                turnero = [];
+                localStorage.setItem("turnero", JSON.stringify(turnero));
+                container3.innerHTML = '';
+    
+                Toastify({
+                    text: "Reservas canceladas",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "right",
+                    backgroundColor: "#234015",
+                    className: "mi-toast"
+                }).showToast();
+
+            }, 2000);
+
+                } else if (result.isDismissed) {
+
+                    Swal.fire({
+                        title: "¡Eso es!",
+                        text: "No cancelaste las reservas",
+                        icon: "success",
+                    });
+                }
+            });
+        } else {
+
+            Toastify({
+                text: "No hay reservas para cancelar",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                backgroundColor: "#234015",
+                className: "mi-toast"
+            }).showToast();
+        }
+    };
+    
+    container2.append(borrarTurnos);
