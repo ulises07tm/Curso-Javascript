@@ -6,12 +6,42 @@
 
 */
 
+/* fuente de letra */
+/* @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');  */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@900&display=swap&subset=greek');
+
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+    /* border: solid red; */
+    /* max-width: 1200px;  */
+}
+html {
+    font-size: 62.5%;
+}
+
+
+
+
+
+
 body {
-    background-color: #395918;
-    font-family: Arial, sans-serif;
-    color: aliceblue;
+    /* background-color: #395918; */
+    background-image: url(../assets/cancha-esquina.jpg);
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+    background-position: center; /* Centra la imagen en el fondo */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+
+    color: white;
+    /* font-family: "arial Black", sans-serif; */
+    font-family: "noto sans", sans-serif;
+    font-style: normal;
     text-align: center;
-    font-weight: 550;
+    /* overflow-x: hidden; */
+    font-weight: 500; 
 }
 
 #container {
@@ -40,7 +70,7 @@ body {
 .botonReserva {
     background-color: #234015;
     color: aliceblue;
-    font-weight: 600;
+    /* font-weight: 600; */
 }
 
 .botonTurnos {
@@ -50,8 +80,88 @@ body {
     background-color: #234015;
     color: aliceblue;
     font-weight: 600;
-    font-size: 0.9rem;
-    width: 7.6rem;
-    height: 2.5rem;
+    font-size: 1.2em;
+    width: 10rem;
+    height: 3.3rem;
     margin: 1rem;
+    padding: 1rem;
+}
+
+
+.tabla-reservada {
+    background-color: #234015 ;
+}
+
+.mi-toast {
+    font-size: 1.5rem;
+}
+
+
+
+
+
+
+h1 {
+    font-size: 6rem;
+}
+
+
+table {
+    font-size: 3rem;
+    font-weight: 300;
+    background-color: #234015;
+    border: solid 0.1rem #aedd94;
+    margin: 3rem;
+    text-align: center;
+    width: 100%;
+}
+table thead tr th {
+    background-color: #234015 ;
+    /* border: solid 0.2rem #aedd94 ; */
+    padding: 1rem;
+}
+table tbody tr td {
+    background-color: #395918 ;
+    border: solid 0.1rem #aedd94;
+    padding: 0.7rem;
+}
+
+
+
+.tabla-color td {
+    font-size: 2rem;
+    border: none;
+    background-color: #395918;
+}
+
+.tabla-cuadrado1 {
+    background: #aedd94;
+    width:1.6rem ;
+    height: 1.6rem;
+    display: inline-block;
+    border-radius: 0.4rem;
+    margin-right: 0.8rem;
+}
+
+.tabla-cuadrado2 {
+    background: #234015;
+    width:1.6rem ;
+    height: 1.6rem;
+    display: inline-block;
+    border-radius: 0.4rem;
+    margin-right: 0.8rem;
+}
+
+.tabla-cuadrado3 {
+    background: skyblue;
+    width:1.6rem ;
+    height: 1.6rem;
+    display: inline-block;
+    border-radius: 0.4rem;
+    margin-right: 0.8rem;
+}
+
+
+.border-none {
+    border: none;
 }

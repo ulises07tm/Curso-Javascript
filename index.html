@@ -11,16 +11,52 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Foul Ahi</h1>
+    
+    <h1>FOUL AHI</h1>
 
+    <div id="container"> 
 
-    <div id="container"> </div>
+        <table id="tabla">
+
+        <thead>
+            <tr class="tabla-reserva">
+                <th class="tabla-reserva">futbol</th>
+                <th class="tabla-reserva border-none">hoy</th>
+            </tr>
+        </thead>
+
+        <tbody id="tablaBody">
+
+            <tr id="tablaLinea1">
+                <td>horarios</td>
+            </tr>
+
+            <tr id="tablaLinea2">
+                <td>disponibilidad</td>
+            </tr>
+
+            <!-- indicacion de disponibilidad -->
+            <tr class="tabla-reserva tabla-color">
+            <td></td>
+            <td colspan="2"><span class="tabla-cuadrado1"></span>disponible</td>
+            <td colspan="2"><span class="tabla-cuadrado2"></span>no disponible</td>
+            <td colspan="2"><span class="tabla-cuadrado3"></span>tu reserva</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    </div>
 
     <div id="container2"> </div>
 
-    <div id="container3"> </div>
+    <!-- <div id="container3"> </div>  -->
 
 
-    <script src="js/main.js"></script>
+    <!-- <script src="js/main.js"></script> -->
+
+    <script src="js/reservas.js"></script>
+
 </body>
 </html>
